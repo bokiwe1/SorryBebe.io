@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry Princess ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #ffcce6 0%, #ff66b2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; 
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 10;
+        }
+
+        .progress-section {
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #ff3385;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .content-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Bikin teks ke tengah karena gambar dihapus */
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 36px;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
+
+        p.message {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+            white-space: pre-line; 
+            padding: 0 10px;
+        }
+
+        .button-section {
+            margin-top: auto;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0.4);
+            color: #ff1a75;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #2b2b2b;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            width: 85%;
+            max-width: 320px;
+            text-align: center;
+        }
+
+        .modal-content p {
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .modal-content button {
+            background: transparent;
+            color: #ff99c2;
+            padding: 0;
+            width: auto;
+            font-size: 14px;
+            box-shadow: none;
+        }
+
+        .heart {
+            position: absolute;
+            top: -50px;
+            font-size: 20px;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="progress-section">
+            <div class="progress-text">
+                <span>Hati Kamu</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="content-section" id="content">
+            <h1 id="title">Hi Bebe</h1>
+            <p class="message" id="message-text">Teks akan muncul di sini</p>
+        </div>
+
+        <div class="button-section">
+            <button id="main-btn" onclick="nextStep()">Buka Surat 💌</button>
+            <button id="restart-btn" style="display: none;" onclick="restartApp()">Ulangi 🤍</button>
+        </div>
+
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <p>Kalo di click berarti udah di maafin.... :* 🤍</p>
+            <button onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        const steps = [
+            {
+                progress: 0,
+                title: "Hi Bebe",
+                text: "Aku tahu akhir-akhir ini aku banyak bikin hati kecil kamu sedih. Aku cuma minta waktu sebentar buat baca ini.",
+                btnText: "Buka Surat 💌"
+            },
+            {
+                progress: 25,
+                title: "",
+                text: "Aku sadar mungkin aku terlalu sering bikin kamu kecewa. Aku gak akan membela diri. Aku cuma mau ngaku kalau aku memang salah.",
+                btnText: "Next 🤍"
+            },
+            {
+                progress: 50,
+                title: "",
+                text: "Aku tahu kata maaf gak langsung menghilangkan rasa kecewa. Tapi aku bener bener minta maaf dari hati yg terdalam.",
+                btnText: "Lanjut"
+            },
+            {
+                progress: 75,
+                title: "",
+                text: "Bebe...\n\nAku bener bener minta maaf. Maaf karena sering membuat kamu gaenak hati. Maaf karena sering mengulang kesalahan yang sama.\n\nAku minta maaf soal hari kemarin, yang dari awal kamu call sampe malem nya aku buat penantian kamu sia sia, aku minta maaf banget yaa bebe . 💖",
+                btnText: "🤍"
+            },
+            {
+                progress: 100,
+                title: "",
+                text: "makasih udah baca semuanya. Semoga setelah ini kamu bisa maafin aku yaa.❤️",
+                btnText: "Peluk Virtual 🫂"
+            }
+        ];
+
+        let currentStep = 0;
+        let heartInterval;
+
+        const progressFill = document.getElementById("progress-fill");
+        const progressPercent = document.getElementById("progress-percent");
+        const titleEl = document.getElementById("title");
+        const messageEl = document.getElementById("message-text");
+        const mainBtn = document.getElementById("main-btn");
+        const restartBtn = document.getElementById("restart-btn");
+        const modal = document.getElementById("modal");
+        const contentArea = document.getElementById("content");
+
+        function renderStep() {
+            const data = steps[currentStep];
+            
+            progressFill.style.width = data.progress + "%";
+            progressPercent.innerText = data.progress + "%";
+
+            contentArea.style.animation = 'none';
+            contentArea.offsetHeight; 
+            contentArea.style.animation = null;
+
+            if(data.title !== "") {
+                titleEl.style.display = "block";
+                titleEl.innerText = data.title;
+            } else {
+                titleEl.style.display = "none";
+            }
+            messageEl.innerText = data.text;
+
+            mainBtn.innerText = data.btnText;
+
+            if (currentStep === steps.length - 1) {
+                restartBtn.style.display = "block";
+                startFallingHearts();
+            } else {
+                restartBtn.style.display = "none";
+                stopFallingHearts();
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                renderStep();
+            } else {
+                modal.classList.add("show");
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove("show");
+        }
+
+        function restartApp() {
+            currentStep = 0;
+            renderStep();
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            
+            const hearts = ['💖', '💕', '💞', '💗', '💓'];
+            heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+            
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        function startFallingHearts() {
+            if (!heartInterval) {
+                heartInterval = setInterval(createHeart, 300);
+            }
+        }
+
+        function stopFallingHearts() {
+            clearInterval(heartInterval);
+            heartInterval = null;
+            const existingHearts = document.querySelectorAll('.heart');
+            existingHearts.forEach(h => h.remove());
+        }
+
+        renderStep();
+
+    </script>
+</body>
+</html>
