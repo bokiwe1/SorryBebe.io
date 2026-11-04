@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I'm Sorry Princess ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Import Font Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -15,7 +16,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(180deg, #ffcce6 0%, #ff66b2 100%);
+            background: linear-gradient(135deg, #ffd6e7 0%, #ffa6d2 50%, #ff7bb8 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -25,105 +26,157 @@
 
         .container {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             height: 100vh;
-            padding: 30px 20px;
+            padding: 24px 20px;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             position: relative;
             z-index: 10;
         }
 
+        /* Progress Bar Section */
         .progress-section {
-            margin-bottom: 30px;
-            margin-top: 20px;
+            margin-top: 10px;
+            margin-bottom: 15px;
         }
         
         .progress-text {
             display: flex;
             justify-content: space-between;
             font-weight: 600;
-            color: #333;
+            color: #4a2c3d;
             margin-bottom: 8px;
-            font-size: 14px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
         }
 
         .progress-bar-bg {
             width: 100%;
-            height: 12px;
-            background-color: rgba(255, 255, 255, 0.5);
-            border-radius: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background-color: #ff3385;
+            background: linear-gradient(90deg, #ff4d94, #ff1a75);
             width: 0%;
-            border-radius: 10px;
-            transition: width 0.5s ease-in-out;
+            border-radius: 20px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(255, 26, 117, 0.5);
         }
 
-        .content-section {
-            flex: 1;
+        /* Main Card Glassmorphism */
+        .card {
+            background: rgba(255, 255, 255, 0.38);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            box-shadow: 0 15px 35px rgba(230, 50, 120, 0.15),
+                        inset 0 0 15px rgba(255, 255, 255, 0.3);
+            padding: 24px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Bikin teks ke tengah karena gambar dihapus */
             text-align: center;
-            animation: fadeIn 0.5s ease-in-out;
+            margin: auto 0;
+            max-height: 65vh;
+            overflow-y: auto;
+            transition: all 0.4s ease;
+        }
+
+        .card::-webkit-scrollbar {
+            width: 4px;
+        }
+        .card::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+        }
+
+        .image-container {
+            width: 100%;
+            max-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            overflow: hidden;
+            border-radius: 18px;
+        }
+
+        img {
+            max-height: 200px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 36px;
-            color: #1a1a1a;
-            margin-bottom: 15px;
+            font-size: 34px;
+            color: #2c1a24;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
         }
 
         p.message {
-            font-size: 14px;
-            color: #333;
-            line-height: 1.6;
+            font-size: 13.5px;
+            color: #3d2231;
+            line-height: 1.65;
             white-space: pre-line; 
-            padding: 0 10px;
+            font-weight: 500;
         }
 
+        /* Buttons Section */
         .button-section {
-            margin-top: auto;
-            margin-bottom: 40px;
+            margin-bottom: 15px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
 
         button {
             width: 100%;
-            padding: 15px;
-            border: none;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
             border-radius: 30px;
-            background-color: rgba(255, 255, 255, 0.4);
-            color: #ff1a75;
-            font-size: 16px;
+            background: rgba(255, 255, 255, 0.55);
+            color: #e6005c;
+            font-size: 15px;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
             cursor: pointer;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+            transition: all 0.25s ease;
         }
 
         button:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
+            background: rgba(255, 255, 255, 0.75);
         }
 
+        /* Modal Glassmorphism Dark Theme */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -138,46 +191,59 @@
         }
 
         .modal-content {
-            background: #2b2b2b;
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
+            background: rgba(35, 25, 35, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 28px 22px;
+            border-radius: 24px;
             width: 85%;
             max-width: 320px;
             text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .modal-content p {
             margin-bottom: 20px;
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
         .modal-content button {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.15);
             color: #ff99c2;
-            padding: 0;
+            padding: 10px 24px;
             width: auto;
-            font-size: 14px;
+            font-size: 13px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: none;
         }
 
+        /* Falling Hearts Animation */
         .heart {
             position: absolute;
             top: -50px;
             font-size: 20px;
             animation: fall linear forwards;
             z-index: 1;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
         }
 
         @keyframes fall {
             to {
-                transform: translateY(100vh) rotate(360deg);
+                transform: translateY(105vh) rotate(360deg);
             }
         }
 
+        .fade-anim {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -186,6 +252,7 @@
 
     <div class="container">
         
+        <!-- Progress Bar -->
         <div class="progress-section">
             <div class="progress-text">
                 <span>Hati Kamu</span>
@@ -196,11 +263,16 @@
             </div>
         </div>
 
-        <div class="content-section" id="content">
+        <!-- Glassmorphism Card -->
+        <div class="card fade-anim" id="card">
+            <div class="image-container" id="img-container">
+                <img id="main-img" src="" alt="Gambar">
+            </div>
             <h1 id="title">Hi Bebe</h1>
             <p class="message" id="message-text">Teks akan muncul di sini</p>
         </div>
 
+        <!-- Action Buttons -->
         <div class="button-section">
             <button id="main-btn" onclick="nextStep()">Buka Surat 💌</button>
             <button id="restart-btn" style="display: none;" onclick="restartApp()">Ulangi 🤍</button>
@@ -208,6 +280,7 @@
 
     </div>
 
+    <!-- Modal Popup -->
     <div class="modal" id="modal">
         <div class="modal-content">
             <p>Kalo di click berarti udah di maafin.... :* 🤍</p>
@@ -215,34 +288,44 @@
         </div>
     </div>
 
+    <!-- Background Audio -->
+    <audio id="bg-music" loop>
+        <source src="1.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
         const steps = [
             {
                 progress: 0,
+                img: "a.png",
                 title: "Hi Bebe",
                 text: "Aku tahu akhir-akhir ini aku banyak bikin hati kecil kamu sedih. Aku cuma minta waktu sebentar buat baca ini.",
                 btnText: "Buka Surat 💌"
             },
             {
                 progress: 25,
+                img: "b.png",
                 title: "",
                 text: "Aku sadar mungkin aku terlalu sering bikin kamu kecewa. Aku gak akan membela diri. Aku cuma mau ngaku kalau aku memang salah.",
                 btnText: "Next 🤍"
             },
             {
                 progress: 50,
+                img: "c.png",
                 title: "",
                 text: "Aku tahu kata maaf gak langsung menghilangkan rasa kecewa. Tapi aku bener bener minta maaf dari hati yg terdalam.",
                 btnText: "Lanjut"
             },
             {
                 progress: 75,
+                img: "",
                 title: "",
                 text: "Bebe...\n\nAku bener bener minta maaf. Maaf karena sering membuat kamu gaenak hati. Maaf karena sering mengulang kesalahan yang sama.\n\nAku minta maaf soal hari kemarin, yang dari awal kamu call sampe malem nya aku buat penantian kamu sia sia, aku minta maaf banget yaa bebe . 💖",
                 btnText: "🤍"
             },
             {
                 progress: 100,
+                img: "d.png",
                 title: "",
                 text: "makasih udah baca semuanya. Semoga setelah ini kamu bisa maafin aku yaa.❤️",
                 btnText: "Peluk Virtual 🫂"
@@ -254,12 +337,14 @@
 
         const progressFill = document.getElementById("progress-fill");
         const progressPercent = document.getElementById("progress-percent");
+        const imgContainer = document.getElementById("img-container");
+        const mainImg = document.getElementById("main-img");
         const titleEl = document.getElementById("title");
         const messageEl = document.getElementById("message-text");
         const mainBtn = document.getElementById("main-btn");
         const restartBtn = document.getElementById("restart-btn");
         const modal = document.getElementById("modal");
-        const contentArea = document.getElementById("content");
+        const card = document.getElementById("card");
 
         function renderStep() {
             const data = steps[currentStep];
@@ -267,9 +352,17 @@
             progressFill.style.width = data.progress + "%";
             progressPercent.innerText = data.progress + "%";
 
-            contentArea.style.animation = 'none';
-            contentArea.offsetHeight; 
-            contentArea.style.animation = null;
+            // Re-trigger animasi fade smooth pas ganti halaman
+            card.classList.remove('fade-anim');
+            void card.offsetWidth; 
+            card.classList.add('fade-anim');
+
+            if(data.img !== "") {
+                imgContainer.style.display = "flex";
+                mainImg.src = data.img;
+            } else {
+                imgContainer.style.display = "none";
+            }
 
             if(data.title !== "") {
                 titleEl.style.display = "block";
@@ -283,14 +376,17 @@
 
             if (currentStep === steps.length - 1) {
                 restartBtn.style.display = "block";
-                startFallingHearts();
             } else {
                 restartBtn.style.display = "none";
-                stopFallingHearts();
             }
         }
 
         function nextStep() {
+            if (currentStep === 0) {
+                const music = document.getElementById("bg-music");
+                music.play().catch(error => console.log("Autoplay dicegah browser"));
+            }
+
             if (currentStep < steps.length - 1) {
                 currentStep++;
                 renderStep();
@@ -331,14 +427,9 @@
             }
         }
 
-        function stopFallingHearts() {
-            clearInterval(heartInterval);
-            heartInterval = null;
-            const existingHearts = document.querySelectorAll('.heart');
-            existingHearts.forEach(h => h.remove());
-        }
-
+        // Jalankan tampilan awal dan langsung nyalakan hujan love
         renderStep();
+        startFallingHearts();
 
     </script>
 </body>
